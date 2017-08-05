@@ -1,0 +1,21 @@
+extends layout
+
+// If there is a 'user' object, that means the user is authenticated.
+
+block content
+  .container
+    h2 VIDID
+    center
+        div(id='top')
+            if(user)
+                p Name: #{ user.username } 
+                p ID: #{ user._id }
+                a(href="/logout") Logout
+                br
+                br
+                include widgets/upload_form
+            if(!user)
+                include widgets/login_form
+    hr
+    h4 Recent Videos
+    div(id='recent_videos')

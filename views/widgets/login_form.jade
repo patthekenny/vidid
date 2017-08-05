@@ -1,0 +1,7 @@
+.login_form
+    form(role='form', action="/login", method="post", style='max-width: 300px;')
+        .form-group
+            input.form-control(type='text', name="username", placeholder='Username')
+        .form-group
+            input.form-control(type='password', name="password", placeholder='Password')
+        button.btn.btn-success(type='submit', style='min-width:300px;') Login
