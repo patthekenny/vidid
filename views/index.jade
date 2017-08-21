@@ -7,9 +7,15 @@ block content
     h2 VIDID
     center
         div(id='top')
+            if(creator)
+                p Creator Name: #{ creator.name }
+                p Creator ID: #{ creator._id }
+                p Creator about: #{ creator.about }
+                p Creator followers: #{ creator.followers }
+                p Creator following: #{ creator.following }
             if(user)
-                p Name: #{ user.username } 
-                p ID: #{ user._id }
+                p User Name: #{ user.username } 
+                p User ID: #{ user._id }
                 a(href="/logout") Logout
                 br
                 br

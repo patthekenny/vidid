@@ -1,0 +1,16 @@
+extends layout
+
+// Assume video isn't null, do checks when rendering.
+// VARS: video, creator
+
+
+block content
+    .container
+        h2 #{video.title}
+        center
+            div(id='top')
+                video(width='640', height='480', autoplay='', controls)
+                    source(src="/videostore/#{video.video_location}", type="video/mp4")
+                    
+            hr
+        h3 Comments

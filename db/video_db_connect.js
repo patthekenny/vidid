@@ -1,4 +1,4 @@
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/video_data')
+mongoose.connect('mongodb://localhost/videos')
 
 module.exports = mongoose;

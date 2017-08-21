@@ -1,6 +1,8 @@
 .upload_form
     form(role='form', action='/upload', method='post', encType='multipart/form-data', style='max-width: 300px;')
-        label(class='btn btn-block btn-default') Choose Video
+        .form-group
+          input.form-control(type='text', name="title", placeholder='Title', style="max-width: 300px; min-width: 300px;")
+        label(class='btn btn-block btn-default', style='max-width: 150px; min-width: 150px;') Choose Video
             input(type='file', name='video', id='video', style='display: none;')
         br
         button.btn.btn-success(type='submit') Upload

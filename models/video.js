@@ -1,4 +1,4 @@
-const mongoose = require('./db/video_db_connect.js');
+const mongoose = require('../db/video_db_connect.js');
 const Schema = mongoose.Schema;
 const Creator = require('./creator.js').schema;
 
@@ -8,9 +8,10 @@ const Video = new Schema({
     views: Number,
     likes: Number,
     dislikes: Number,
-    comments: [ String ],
+    comments: [ Schema.Types.Mixed ],
     description: String,
-    creator: [ Creator ]
+    creatorIDs: [ Schema.Types.Mixed ],
+    thumbnail: String
 });
 
 module.exports = mongoose.model('video', Video);

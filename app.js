@@ -38,7 +38,6 @@ app.use(flash());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
-
 app.use('/', routes);
 app.use('/upload', upload);
 
