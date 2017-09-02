@@ -45,7 +45,7 @@ router.post('/', (req, res) => {
             Creator.find({ "name" : req.user.username }, (err, data, length) => {
                 if(err) return res.status(500).send("We messed up somewhere. I'm sure we'll figure it out soon.");
 
-                let newVideo = new Video({ title : req.body.title == undefined ? "Untitled" : req.body.title, video_location : `${fullFileName}`, creatorIDs: data[0]._id, views: 1, likes: 0, dislikes: 0, description: "I haven't added this feature yet!" });
+                let newVideo = new Video({ title : req.body.title == undefined ? "Untitled" : req.body.title, video_location : `${fullFileName}`, creatorIDs: data[0]._id, views: 1, likes: 0, dislikes: 0, description: "I haven't added this feature yet!", thumbnail: "http://i.imgur.com/uZxUpkm.png"});
 
                 newVideo.save((err, video, length) => {
                     if(err) res.status(500).send("Saving video into DB failed..");

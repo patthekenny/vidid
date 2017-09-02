@@ -25,3 +25,9 @@ block content
     hr
     h4 Recent Videos
     div(id='recent_videos')
+        each video in videos
+            div(id='#{video._id}', style="display:inline;")
+                a(href='/v/#{video._id}')
+                    img(src='#{video.thumbnail}', width=250, height=150)
+                    div(style="padding-top: 10px;")
+                    p #{video.title}

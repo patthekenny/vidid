@@ -9,10 +9,17 @@ const mongoose = require('mongoose');
 router.get('/', (req, res) => {
     console.log(req.body);
     if(!req.user) return res.render('index', { user : req.user});
-    Creator.find({ "name" : req.user.username }, (err, data) => {
+    Creator.find({ "name" : req.user.username }, (err, creators) => {
       if(err) console.log(err);
-      return res.render('index', { user : req.user, creator : data[0] });
+      let creatorSearch = creators;
+      Video.find({}).sort({'_id' : -1}).limit(10).exec( (err, videos) => {
+        if(err) console.log(err);
+        console.log(videos, "\n" + videos.length);
+        return res.render('index', { user : req.user, creator : creatorSearch[0], videos : videos });
+      });
+      // return res.render('index', { user : req.user, creator : data[0] });
     });
+
     /*
     Creator.update({ "name" : req.user.username }, { $push : {'followers' : 1}}, {upsert : true }, (err, data) => {
       if(err) console.log(err);
@@ -23,6 +30,7 @@ router.get('/', (req, res) => {
 
 router.get('/v/:id', (req, res) => {
     Video.find({"_id" : req.params.id}, (err, video, data) => {
+        Creator.find({"_id" : video[0]})
         if(err) return res.send("Error looking in video DB");
         return res.render('video', { video : video[0] });
     });
