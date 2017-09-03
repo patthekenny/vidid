@@ -7,25 +7,42 @@ const router = express.Router();
 const mongoose = require('mongoose');
 
 router.get('/', (req, res) => {
-    console.log(req.body);
-    if(!req.user) return res.render('index', { user : req.user});
-    Creator.find({ "name" : req.user.username }, (err, creators) => {
-      if(err) console.log(err);
-      let creatorSearch = creators;
-      Video.find({}).sort({'_id' : -1}).limit(10).exec( (err, videos) => {
-        if(err) console.log(err);
-        console.log(videos, "\n" + videos.length);
-        return res.render('index', { user : req.user, creator : creatorSearch[0], videos : videos });
-      });
-      // return res.render('index', { user : req.user, creator : data[0] });
-    });
+    //if(!req.user) return res.render('index', { });
+    
+    if(req.user){
+        let creatorPromise = Creator.find({ "name" : req.user.username }).exec();
+    }
+    
+    let videoPromise = Video.find({}).sort({'_id' : -1}).limit(10).exec();
+
+    if(creatorPromise) {
+        creatorPromise.then( creatorResult => {
+           let creator = creatorResult;
+           videoPromise.then(videos => {
+                return res.render('index', { user : req.user, creator : creator, videos : videos });   
+           });
+        });
+    } else {
+        videoPromise.then(videos => {
+            return res.render('index', { videos : videos });   
+        });
+    }
 
     /*
-    Creator.update({ "name" : req.user.username }, { $push : {'followers' : 1}}, {upsert : true }, (err, data) => {
+    Creator.find({ "name" : req.user.username }, (err, creator) => { 
       if(err) console.log(err);
-      console.log(data);
+      let creatorResult = creator;
+      Video.find({}).sort({'_id' : -1}).limit(10).exec( (err, videos) => {
+        if(err) console.log(err);
+        if(req.user){
+            return res.render('index', { user : req.user, creator : creatorResult[0], videos : videos });   
+        } else {
+            return res.render('index', { videos : videos });   
+        }
+      });
     });
     */
+
 });
 
 router.get('/v/:id', (req, res) => {
