@@ -1,16 +1,13 @@
 extends layout
 
-// Assume video isn't null, do checks when rendering.
-// VARS: video, creator
-
-
 block content
     .container
-        h2 #{video.title}
+        h2 #{video.title} • #{video.views} views
         center
             div(id='top')
                 video(width='640', height='480', autoplay='', controls)
                     source(src="/videostore/#{video.video_location}", type="video/mp4")
                     
+        p made by #[a(href="/#{creator.name}") #{creator.name}]
             hr
         h3 Comments

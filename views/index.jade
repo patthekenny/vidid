@@ -1,6 +1,5 @@
 extends layout
-
-// If there is a 'user' object, that means the user is authenticated.
+include mixins/video_thumb
 
 block content
   .container
@@ -13,7 +12,7 @@ block content
                 p Creator about: #{ creator.about }
                 p Creator followers: #{ creator.followers }
                 p Creator following: #{ creator.following }
-            if(user.username)
+            if(user)
                 p User Name: #{ user.username } 
                 p User ID: #{ user._id }
                 a(href="/logout") Logout
@@ -25,10 +24,6 @@ block content
     hr
     h4 Recent Videos
     div(id='recent_videos')
-    if(videos)
-        each video in videos
-            div(id='#{video._id}', style="display:inline;")
-                a(href='/v/#{video._id}')
-                    img(src='#{video.thumbnail}', width=250, height=150)
-                    div(style="padding-top: 10px;")
-                    p #{video.title}
+        if(videos)
+            each video in videos
+                +vid(video)

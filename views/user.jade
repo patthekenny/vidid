@@ -1,0 +1,15 @@
+extends layouts/user_layout
+include mixins/video_thumb
+
+block content
+    .container
+        div(id="leftbar")
+        div(id="main_content")
+            h1 #{user.name}
+            br
+            br
+            div(id='videos')
+                if(user_videos)
+                    each v in user_videos
+                        +vid(v[0])
+                        

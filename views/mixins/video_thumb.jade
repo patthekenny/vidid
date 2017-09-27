@@ -1,0 +1,6 @@
+mixin vid(video)
+    div(id='#{video._id}', style="float:left;", class="video_class")
+        a(href='/v/#{video._id}')
+            img(src='/thumbnailstore/#{video.thumbnail}', width=250, height=150)
+            p #{video.title} • #{video.views} views
+            p 

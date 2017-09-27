@@ -1,0 +1,17 @@
+#leftbar {
+    position: absolute;
+    left: 0%;
+    width: 300px;
+    height: 100%;
+    background-color: #eff2f7;
+}
+
+#main_content {
+    position: absolute;
+    left: 350px;
+    height: 100%;
+}
+
+.video_class {
+    margin-right: 10px;
+}
