@@ -1,3 +1,8 @@
-## User Authentication With Passport and Express 4
+## VIDID
+Video platform for the modern age. 
 
-View the blog post here: http://mherman.org/blog/2015/01/31/local-authentication-with-passport-and-express-4
+## WHAT IS IT?
+It's a very simple video hosting and viewing platform. YouTube is too bloated as a service and too morally questionable as a platform, so I decided that it was time to make my own. 
+
+## QUESTIONS:
+Email me at patrick@didey.net or open up an issue on GitHub.
