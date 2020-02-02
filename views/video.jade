@@ -1,13 +1,24 @@
 extends layout
 
+
 block content
     .container
+    
+        script(src='http://code.jquery.com/jquery.js')
+        
+       
+        script. 
+            let video_id = "#{video._id}"
+
         h2 #{video.title} • #{video.views} views
         center
             div(id='top')
                 video(width='640', height='480', autoplay='', controls)
                     source(src="/videostore/#{video.video_location}", type="video/mp4")
                     
-        p made by #[a(href="/#{creator.name}") #{creator.name}]
-            hr
+        p made by #[a(href="/u/#{creator.name}") #{creator.name}]
+        button(id='like') Like
+        button(id='dislike') Dislike
+        hr
         h3 Comments
+        script(src="/scripts/video_page.js")

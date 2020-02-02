@@ -11,5 +11,6 @@ block content
             div(id='videos')
                 if(user_videos)
                     each v in user_videos
-                        +vid(v[0])
+                        if(v)                        
+                            +vid(v)
                         

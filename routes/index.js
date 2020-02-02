@@ -7,6 +7,9 @@ const router = express.Router();
 const mongoose = require('mongoose');
 
 router.get('/', (req, res) => {
+    // There are two data points created for every registration; a "user" entry for authentication,
+    // and a "creator" entry that is associated with all creative data. 
+    // This promise is to find the creator account associated with the authenticated user account.
     let creatorPromise;
 
     if(req.user){
@@ -36,24 +39,29 @@ router.get('/v/:id', (req, res) => {
         if(err) return res.send("Error looking in video DB");
         Creator.find({ "_id" : video[0].creatorIDs[0] }, (err, data) => {
             if(err) return res.send("Error looking in creator DB");
-            return res.render('video', { video : video[0], creator : data[0] });
+
+            return res.render('video', { username: req.user.username, video : video[0], creator : data[0] });
         })
     });
 });
 
-router.get('/:username', (req, res) => {
+router.get('/u/:username', (req, res) => {
     Creator.find({"name" : req.params.username }, (err, data, length) => {
+
         if(!data[0]) return res.send("User doesn't exist.");
         
         let userVideoPromises = [];
 
         data[0].videos.forEach( video => {
-            userVideoPromises.push( Video.find( {"_id" : video } ).lean().exec() );
+            userVideoPromises.push( Video.findOne( {"_id" : video } ).lean().exec() );
         });
 
+
         Promise.all(userVideoPromises).then( user_videos => {
+            console.log(user_videos);
             return res.render('user', { user: data[0], user_videos: user_videos });
         });
+
     });
 });
 

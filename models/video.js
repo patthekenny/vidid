@@ -7,6 +7,7 @@ const Video = new Schema({
     video_location: String,
     views: Number,
     likes: Number,
+    likedBy: [ Schema.Types.Mixed ],
     dislikes: Number,
     comments: [ Schema.Types.Mixed ],
     description: String,

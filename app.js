@@ -14,6 +14,7 @@ var fileUpload = require('express-fileupload');
 var routes = require('./routes/index');
 var users = require('./routes/users');
 var upload = require('./routes/upload');
+var video_routes = require('./routes/video_routes');
 
 var app = express();
 
@@ -29,7 +30,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(require('express-session')({
-    secret: 'keyboard cat',
+    secret: 'madara did nothing wrong.',
     resave: false,
     saveUninitialized: false
 }));
@@ -40,6 +41,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);
 app.use('/upload', upload);
+app.use('/video_routes', video_routes);
+
 
 // passport config
 var Account = require('./models/account');
